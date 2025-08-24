@@ -31,10 +31,10 @@
     }
     @media(min-width: 992px) {
       .main-content {
-        margin-left: 300px; /* só aplica no desktop */
+        margin-left: 300px; /* Desktop */
       }
       footer.page-footer {
-        margin-left: 300px;
+        margin-left: 300px; /* Desktop */
       }
     }
     .banner {
@@ -49,11 +49,12 @@
       background: rgb(8, 8, 8);
       color: white;
       padding: 10px 20px;
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: bold;
       border-radius: 8px;
       text-align: center;
     }
+    /* Responsividade banner */
     @media(max-width: 600px) {
       .banner-text {
         font-size: 1.2rem;
@@ -84,7 +85,7 @@
     }
     #projetos .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
     #projetos .card {
@@ -145,7 +146,16 @@
     #projetos .links a.demo:hover {
       background: #1e7e34;
     }
+    /* Remove margem fixa em telas pequenas */
+    @media (max-width: 991px) {
+      .main-content, footer.page-footer {
+        margin-left: 0 !important;
+      }
+    }
   </style>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </head>
 <body>
 
@@ -175,7 +185,6 @@
       <div class="banner-text">Hello World! Eu sou um... <span class="typed"></span></div>
     </div>
 
-    <!-- Seções -->
     <section id="sobre" class="section scrollspy">
       <h5>Sobre mim</h5>
       <p>Farmacêutico pela UFSJ e pós-graduado em Assuntos Regulatórios pelo ICTQ. Atuo como Analista de Assuntos Regulatórios, desenvolvedor freelancer full stack e analista de dados, unindo ciência e tecnologia para criar soluções práticas e inovadoras.</p>
@@ -183,7 +192,7 @@
 
     <section id="resumo" class="section scrollspy">
       <h5>Resumo:</h5>
-      <p><strong>Formação:</strong> Farmacêutico (UFSJ,2023) e Pós-graduado em Assuntos Regulatórios (ICTQ, 2025)</p>
+      <p><strong>Formação:</strong> Farmacêutico (UFSJ,2023) e Pós-graduado em Assuntos Regulatórios (ICTQ, 2025) </p>
       <p><strong>Idiomas:</strong> Inglês técnico (leitura e escrita).</p>
     </section>
 
@@ -191,9 +200,9 @@
       <h5>Experiência</h5>
       <ul class="collection">
         <li class="collection-item">
-          <strong>Desenvolvedor FullStack independente</strong> — MEI<br>
+          <strong>Desevolvedor FullStack independente</strong> — MEI<br>
           <em>Set 2020 – Presente</em><br>
-          Desenvolvimento de Softwares e Sites, incluindo automação de tarefas com Python, dashboards, relatórios e análise dados.
+          Desevnvolvimento de Softwares e Sites, incluindo automação de tarefas com Python, dashboards, relatórios e análise dados.
         </li>
         <li class="collection-item">
           <strong>Analista de Assuntos Regulatórios Jr</strong> — Globo Pharma<br>
@@ -203,7 +212,7 @@
         <li class="collection-item">
           <strong>Estagiário de Assuntos Regulatórios</strong> — Globo Pharma<br>
           <em>Ago 2023 – Out 2023</em><br>
-          Auxílio nas atividades de Registro e pós-registro de medicamentos. Projeto de automação para monitoramento de publicações regulatórias.
+              Auxílio nas atividades de Registro e pós-registro de medicamentos. Projeto de automação para monitoramento de publicações regulatórias.
         </li>
       </ul>
     </section>
@@ -249,14 +258,16 @@
 
   <!-- Materialize JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Sidenav mobile
       M.Sidenav.init(document.querySelectorAll('.sidenav'));
+
+      // ScrollSpy
       M.ScrollSpy.init(document.querySelectorAll('.scrollspy'), { scrollOffset: 100 });
 
-      // Typed.js efeito
+      // Typed.js
       new Typed('.typed', {
         strings: ['Farmacêutico', 'FarmacêuTIco', 'Desenvolvedor Full Stack'],
         typeSpeed: 50,
@@ -299,8 +310,12 @@
             <h3>${repo.name}</h3>
             <p>${repo.description || 'Sem descrição'}</p>
             <div class="links">
-              <a href="${repo.html_url}" target="_blank" class="github">GitHub</a>
-              ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="demo">Demo</a>` : ''}
+              <a href="${repo.html_url}" target="_blank" title="Ver no GitHub" class="github">
+                GitHub
+              </a>
+              ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" title="Ver Demo" class="demo">
+                Demo
+              </a>` : ''}
             </div>
           </div>
         `;
@@ -325,6 +340,7 @@
       fetchRepos(true);
     }
 
+    // Inicializa o carregamento
     fetchRepos();
   </script>
 </body>
